@@ -1,4 +1,4 @@
-<?php 
+<?php
 	function _self(){
 		$objet = debug_backtrace();
 		//~ $filtre = array_filter($objet, function($i){return isset($i["object"]);});
@@ -7,9 +7,9 @@
 	function _get($nom){
 		return $GLOBALS[$nom];
 	}
-	function _super(){
-		return _self()->call("parent");
-	}
+	// function _super(){
+	// 	return _self()->call("parent");
+	// }
 	class __instance__{
 		function __construct($genitor){
 			$this->genitor = $genitor;
@@ -31,7 +31,7 @@
 			return (string) $this->call("to_s");
 		}
 	}
-	
+
 	class __object__{
 		protected $freeze, $genitor, $instances, $valeurs;
 		function __construct($name, $genitor){
@@ -97,7 +97,7 @@
 			return (string) $this->call("to_s");
 		}
 	}
-//Definition de la classe Object	
+//Definition de la classe Object
 	$Object = new __object__("Object", "");
 	$Object->freeze();
 	include "Primitives.php";

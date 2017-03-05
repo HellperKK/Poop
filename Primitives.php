@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //Definition de la classe Booleen
 	$Object->make_child("Booleen");
@@ -31,24 +31,30 @@
 	$Int->define_instance("construct", function($val){
 		_self()->val = (int) $val;
 	});
+
 	$Int->define_instance("to_s", function(){return _self()->val;});
+
 	$Int->define_instance("opposite", function(){
 		return _self()->call("parent")->make(- _self()->val);
 	});
-	$Int->define_instance("add", function($anInt){
+
+	$Int->define_instance("+", function($anInt){
 		return _self()->call("parent")->make(_self()->val + $anInt);
 	});
-	$Int->define_instance("remove", function($anInt){
+
+	$Int->define_instance("-", function($anInt){
 		return _self()->call("parent")->make(_self()->val - $anInt);
 	});
+
 	$Int->define_instance("times", function($anInt){
 		if($anInt > 0){
-			return _self()->call("times", $anInt - 1)->call("add", _self()->val);
+			return _self()->call("times", $anInt - 1)->call("+", _self()->val);
 		}
 		else{
 			return _self()->call("parent")->make(0);
 		}
 	});
+
 	$Int->define_instance("pow", function($anInt){
 		if($anInt > 0){
 			return _self()->call("pow", $anInt - 1)->call("times", _self()->val);
