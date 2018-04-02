@@ -18,7 +18,7 @@
 		echo "Non !";
 	}
 	echo "<br>";
-	echo $Int->make(11)->call("times", 2)->call("-", 3)->call("opposite");
+	echo $Int->make(11)->call("*", 2)->call("-", 3)->call("opposite");
 	$Int->make_child("Intb");
-	echo $Intb->make(11)->call("times", 2)->call("-", 3)->call("opposite");
+	echo $Intb->make(11)->call("*", 2)->call("-", 3)->call("opposite");
 ?>  
