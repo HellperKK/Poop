@@ -1,13 +1,22 @@
 <?php
-  include "src/instance.php";
-  $test = new Instance(Null);
+  include "src/lib.php";
+  $test = $Object->clone();
   $test->test = function($self, $name){echo "Hello " . $name;};
-  $test->test("John");
+  $test->test($String->from("John"));
 
-  $testb = new Instance($test);
-  $testb->test("Paul");
-
-  $testc = new Instance(Null);
-  $testc->test = $test->test;
-  $testc->test("Jacques");
+  $Range = $Object->clone();
+  $Range->max = 10;
+  $Range->min = 0;
+  $Range->include = function($self, $value)
+    {
+      return ($self->max > $value) && ($self->min <= $value);
+    };
+  if ($Range->include($Int->from(5)))
+  {
+    echo "It is included !";
+  }
+  else
+  {
+    echo "It is not included !";
+  }
 ?>
