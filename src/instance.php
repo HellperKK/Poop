@@ -11,10 +11,17 @@
 
     function __call($name, $args)
     {
+      foreach($args as $key => $val)
+      {
+        if ($val instanceof Instance)
+        {
+          $args[$key] = $val->identity();
+        }
+      }
       array_unshift($args, $this);
       if (isset($this->$name))
       {
-        ($this->$name)(...$args);
+        return ($this->$name)(...$args);
       }
       else
       {
@@ -25,7 +32,7 @@
         }
         if (isset($inst->$name))
         {
-          ($inst->$name)(...$args);
+          return ($inst->$name)(...$args);
         }
         else
         {
