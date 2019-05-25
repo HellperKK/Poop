@@ -11,13 +11,13 @@
 
     function __call($name, $args)
     {
-      foreach($args as $key => $val)
-      {
-        if ($val instanceof Instance)
-        {
-          $args[$key] = $val->identity();
-        }
-      }
+      // foreach($args as $key => $val)
+      // {
+      //   if ($val instanceof Instance)
+      //   {
+      //     $args[$key] = $val->identity();
+      //   }
+      // }
       array_unshift($args, $this);
       if (isset($this->$name))
       {
