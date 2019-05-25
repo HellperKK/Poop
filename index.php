@@ -1,7 +1,7 @@
 <?php
   include "src/lib.php";
   $test = $Object->clone();
-  $test->test = function($self, $name){echo "Hello " . $name;};
+  $test->test = function($self, $name){echo "Hello " . $name->identity();};
   $test->test($String->from("John"));
 
   $Range = $Object->clone();
@@ -9,6 +9,7 @@
   $Range->min = 0;
   $Range->include = function($self, $value)
     {
+      $value = $value->identity();
       return ($self->max > $value) && ($self->min <= $value);
     };
   if ($Range->include($Int->from(5)))

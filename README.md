@@ -40,6 +40,4 @@ else
 ```
 In fact, `$Int` is instance that can generate a wrapper to hold an int from php's
 primitives. But you don't need to know where that int is located. Each Instance
-has a method that return itself by default and that has been overriden is `$Int`
-to return the value it holds. This method is automatically called when using an
-`Instance` object inside an `Instance` method.
+has a `identity` method that return itself by default and that has been overriden in `$Int` to return the value it holds.
