@@ -2,7 +2,7 @@
 Poop (Php's Object Oriented Project) is an experiment for classless
 object oriented programming.
 
-It is highly inspired of javascript and python.
+It is highly inspired of javascript and python and also IO.
 
 # How to use
 ## Create in instance
@@ -21,15 +21,16 @@ keyword.
 $Range->max = 10;
 $Range->min = 0;
 $Range->include = function($self, $value)
-  {
-    return ($self->max > $value) && ($self->min <= $value);
-  };
+{
+  $value = $value->identity();
+  return ($self->max > $value) && ($self->min <= $value);
+};
 ```
 
-Some already-defined instances are made to create instances like `$Int`, with the method build.
+Some already-defined instances are made to create instances like `$Int`, with the method from.
 
 ```
-if ($Range->include($Int->build(5)))
+if ($Range->include($Int->from(5)))
 {
   echo "It is included !";
 }
@@ -40,4 +41,5 @@ else
 ```
 In fact, `$Int` is instance that can generate a wrapper to hold an int from php's
 primitives. But you don't need to know where that int is located. Each Instance
-has a `identity` method that return itself by default and that has been overriden in `$Int` to return the value it holds.
+has an `identity` method that return itself by default and that has been overriden in `$Int` to return the value it holds.
+This is also true for strings, floats and booleans.
