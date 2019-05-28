@@ -5,12 +5,12 @@
   class Instance
   {
     public $prototype;
-    public $values;
+    public $slots;
 
     function __construct($prototype)
     {
       $this->prototype = $prototype;
-      $this->values = [];
+      $this->slots = [];
     }
 
     function __call($name, $args)
@@ -28,25 +28,25 @@
 
     function __set($name, $value)
     {
-      return $this->values[$name] = $value;
+      return $this->slots[$name] = $value;
     }
 
     function look_for($name)
     {
-      if (isset($this->values[$name]))
+      if (isset($this->slots[$name]))
       {
-        return $this->values[$name];
+        return $this->slots[$name];
       }
       else
       {
         $inst = $this->prototype;
-        while (isset($inst) && (! isset($inst->values[$name])))
+        while (isset($inst) && (! isset($inst->slots[$name])))
         {
           $inst = $inst->prototype;
         }
-        if (isset($inst->values[$name]))
+        if (isset($inst->slots[$name]))
         {
-          return $inst->values[$name];
+          return $inst->slots[$name];
         }
         else
         {
