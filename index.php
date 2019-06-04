@@ -25,6 +25,13 @@
   {
     echo "It is not included !";
   }
+  $Range->make = function($self, $min, $max)
+  {
+    $new = $self->clone();
+    $new->min = $min;
+    $new->max = $max;
+    return $new;
+  };
 
   $Greeter = $Object->clone();
   $Greeter->greet = function($self)

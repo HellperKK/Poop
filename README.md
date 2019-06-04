@@ -7,11 +7,13 @@ It is highly inspired of javascript and python and also IO.
 # How to use
 ## Create an instance
 
-You create an instance by cloning another one, like the object instance
+You create an instance by cloning another one, like the Object instance
 ```
 include "src/lib.php";
 $Range = $Object->clone();
 ```
+
+Making this will allow range to inherit form all of Object's attributes.
 
 ## Add attributes and methods
 Then you can add attributes and methods like this. Like in python, a method's
@@ -38,7 +40,7 @@ possible to search not only in the instance's slots but also in the slots on its
 prototype in chain until there is not more parent instance, which allow for
 inheritance.
 
-##Wrappers
+## Wrappers
 Some already-defined instances are made to create instances like `$Int`, with the method from.
 
 ```
@@ -55,3 +57,18 @@ In fact, `$Int` is instance that can generate a wrapper to hold an int from php'
 primitives. But you don't need to know where that int is located. Each Instance
 has an `identity` method that return itself by default and that has been overriden in `$Int` to return the value it holds.
 This is also true for strings, floats and booleans.
+
+## Generating instances
+Making one range is fine, but it can be more efficient to use inheritance to generate different ranges.
+
+```
+$Range->make = function($self, $min, $max)
+{
+  $new = $self->clone();
+  $new->min = $min;
+  $new->max = $max;
+  return $new;
+};
+```
+With `$Range->make` we can now create new ranges with the same behaviour as
+`$Range`.
