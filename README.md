@@ -5,7 +5,7 @@ object oriented programming.
 It is highly inspired of javascript and python and also IO.
 
 # How to use
-## Create in instance
+## Create an instance
 
 You create an instance by cloning another one, like the object instance
 ```
@@ -13,20 +13,32 @@ include "src/lib.php";
 $Range = $Object->clone();
 ```
 
+## Add attributes and methods
 Then you can add attributes and methods like this. Like in python, a method's
 first agrument must reference the instance itself so there is no more `this`
 keyword.
 
 ```
-$Range->max = 10;
-$Range->min = 0;
+$Range->max = $Int->from(10);
+$Range->min = $Int->from(0);
 $Range->include = function($self, $value)
 {
   $value = $value->identity();
-  return ($self->max > $value) && ($self->min <= $value);
+  return ($self->max->identity() > $value) && ($self->min->identity() <= $value);
 };
 ```
 
+In fact, min, max and include are not really attributes of the instance but
+stored inside an attribute named `slots` that contains an array of every
+attribute of the instance.
+
+So getting a value or calling a method is in fact done using ghost methods
+and attributes with the special methods `__get` and `__call`. This make
+possible to search not only in the instance's slots but also in the slots on its
+prototype in chain until there is not more parent instance, which allow for
+inheritance.
+
+##Wrappers
 Some already-defined instances are made to create instances like `$Int`, with the method from.
 
 ```
