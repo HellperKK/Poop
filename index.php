@@ -32,18 +32,27 @@
     $new->max = $max;
     return $new;
   };
+  $ran = $Range->make($Int->from(0), $Int->from(100));
+  if ($ran->include($Int->from(5)))
+  {
+    echo "It is included !";
+  }
+  else
+  {
+    echo "It is not included !";
+  }
 
   $Greeter = $Object->clone();
   $Greeter->greet = function($self)
   {
     echo "Hello " . $self->name . " !";
   };
-  $Greeter->build = function($self, $name)
+  $Greeter->make = function($self, $name)
   {
     $inst = $self->clone();
     $inst->name = $name;
     return $inst;
   };
-  $greet = $Greeter->build("world");
+  $greet = $Greeter->make("world");
   $greet->greet();
 ?>
