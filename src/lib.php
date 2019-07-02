@@ -1,16 +1,16 @@
 <?php
   include "instance.php";
   $Object = new Instance(null);
-  $Object->identity = function($self)
-  {
-    return $self;
-  };
+  // $Object->identity = function($self)
+  // {
+  //   return $self;
+  // };
 
   $Primitive = $Object->clone();
-  $Primitive->identity = function($self)
-  {
-    return $self->value;
-  };
+  // $Primitive->identity = function($self)
+  // {
+  //   return $self->value;
+  // };
   $Primitive->from = function($self, $value)
   {
     $val = $self->clone();

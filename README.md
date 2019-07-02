@@ -21,12 +21,12 @@ first agrument must reference the instance itself so there is no more `this`
 keyword.
 
 ```
-$Range->max = $Int->from(10);
-$Range->min = $Int->from(0);
+$Range = $Object->clone();
+$Range->max = 10;
+$Range->min = 0;
 $Range->include = function($self, $value)
 {
-  $value = $value->identity();
-  return ($self->max->identity() > $value) && ($self->min->identity() <= $value);
+  return ($self->max > $value) && ($self->min <= $value);
 };
 ```
 
@@ -39,24 +39,6 @@ and attributes with the special methods `__get` and `__call`. This make
 possible to search not only in the instance's slots but also in the slots on its
 prototype in chain until there is not more parent instance, which allow for
 inheritance.
-
-## Wrappers
-Some already-defined instances are made to create instances like `$Int`, with the method from.
-
-```
-if ($Range->include($Int->from(5)))
-{
-  echo "It is included !";
-}
-else
-{
-  echo "It is not included !";
-}
-```
-In fact, `$Int` is instance that can generate a wrapper to hold an int from php's
-primitives. But you don't need to know where that int is located. Each Instance
-has an `identity` method that return itself by default and that has been overriden in `$Int` to return the value it holds.
-This is also true for strings, floats and booleans.
 
 ## Generating instances
 Making one range is fine, but it can be more efficient to use inheritance to generate different ranges.
