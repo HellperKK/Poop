@@ -10,7 +10,7 @@ It is highly inspired of javascript and python and also IO.
 You create an instance by cloning another one, like the Object instance
 ```
 include "src/lib.php";
-$Range = $Object->clone();
+$Range = Instance::object()->clone();
 ```
 
 Making this will allow range to inherit form all of Object's attributes.
@@ -21,7 +21,6 @@ first agrument must reference the instance itself so there is no more `this`
 keyword.
 
 ```
-$Range = $Object->clone();
 $Range->max = 10;
 $Range->min = 0;
 $Range->include = function($self, $value)
