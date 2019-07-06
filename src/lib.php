@@ -1,12 +1,6 @@
 <?php
   include "instance.php";
-  $Object = new Instance(null);
-  // $Object->identity = function($self)
-  // {
-  //   return $self;
-  // };
-
-  $Primitive = $Object->clone();
+  $Primitive = Instance::object()->clone();
   // $Primitive->identity = function($self)
   // {
   //   return $self->value;

@@ -1,6 +1,6 @@
 <?php
   include "src/lib.php";
-  $test = $Object->clone();
+  $test = Instance::object()->clone();
   $test->test = function($self){echo "Hello " . $self->name;};
   $test->name = "John";
   $test->test();
@@ -9,7 +9,7 @@
   $testb->test = function($self){echo "Salut " . $self->name;};
   $testb->test();
 
-  $Range = $Object->clone();
+  $Range = Instance::object()->clone();
   $Range->max = 10;
   $Range->min = 0;
   $Range->include = function($self, $value)
@@ -41,7 +41,7 @@
     echo "It is not included !";
   }
 
-  $Greeter = $Object->clone();
+  $Greeter = Instance::object()->clone();
   $Greeter->greet = function($self)
   {
     echo "Hello " . $self->name . " !";

@@ -4,13 +4,24 @@
    */
   class Instance
   {
+    private $object = null;
+
     public $prototype;
     public $slots;
 
-    function __construct($prototype)
+    private function __construct($prototype)
     {
       $this->prototype = $prototype;
       $this->slots = [];
+    }
+
+    function object()
+    {
+      if (! isset(self::$object))
+      {
+        $object = new Instance(null);
+      }
+      return $object;
     }
 
     function __call($name, $args)
