@@ -107,5 +107,3 @@
       return new Instance($this);
     }
   }
-
-?>
