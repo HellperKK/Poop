@@ -4,7 +4,7 @@
    */
   class Instance
   {
-    private $object = null;
+    private static $object = null;
 
     public $prototype;
     public $slots;
@@ -20,8 +20,9 @@
       if (! isset(self::$object))
       {
         $object = new Instance(null);
+        self::$object = $object;
       }
-      return $object;
+      return self::$object;
     }
 
     function __call($name, $args)
@@ -40,6 +41,41 @@
     function __set($name, $value)
     {
       return $this->slots[$name] = $value;
+    }
+
+    function __isset($name)
+    {
+      try 
+      {
+        $this->look_for($name);
+        return true;
+      } 
+      catch (\Throwable $th)
+      {
+        return false;
+      }
+    }
+
+    function __unset($name)
+    {
+      unset($this->slots[$name]);
+    }
+
+    function __toString()
+    {
+      try 
+      {
+        return $this->toString();
+      } 
+      catch (\Throwable $th) 
+      {
+        return "";
+      }
+    }
+
+    function __invoke(...$args)
+    {
+      $this->call(...$args);
     }
 
     function look_for($name)
