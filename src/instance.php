@@ -80,7 +80,7 @@ class Instance
 
     $inst = $this->prototype;
 
-    while (isset($inst) && (!isset($inst->slots[$name]))) {
+    while (isset($inst)) {
       if (isset($inst->slots[$name])) {
         return $inst->slots[$name];
       }
